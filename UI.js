@@ -609,8 +609,8 @@ ui.start.click(function () {
     }
     threads.start(function () {
         let url = [
-              //'https://cdn.jsdelivr.net/gh/qq329192/qgzy/'+ui.script_chosen.getSelectedItemPosition()+'.js',
-            'https://sp.sec-an.cn/storage01/Better-Auto-XXQG/'+ui.script_chosen.getSelectedItemPosition()+'.js',
+              'https://cdn.jsdelivr.net/gh/qq329192/qgzy/'+ui.script_chosen.getSelectedItemPosition()+'.js',
+//             'https://sp.sec-an.cn/storage01/Better-Auto-XXQG/'+ui.script_chosen.getSelectedItemPosition()+'.js',
             //'https://ghproxy.com/https://raw.githubusercontent.com/sec-an/Better-Auto-XXQG/main/'+ui.script_chosen.getSelectedItemPosition()+'.js',
             //'https://cdn.jsdelivr.net/gh/sec-an/Better-Auto-XXQG@main/'+ui.script_chosen.getSelectedItemPosition()+'.js',
             //'https://raw.githubusercontent.com/sec-an/Better-Auto-XXQG/main/'+ui.script_chosen.getSelectedItemPosition()+'.js',
