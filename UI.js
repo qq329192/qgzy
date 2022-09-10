@@ -610,7 +610,7 @@ ui.start.click(function () {
         return;
     }
     threads.start(function () {
-        let url = 'https://cdn.jsdelivr.net/gh/qq329192/qgzy/'+ui.script_chosen.getSelectedItemPosition()+'.js';
+        let url = 'https://ghproxy.com/https://raw.githubusercontent.com/qq329192/qgzy/main/'+ui.script_chosen.getSelectedItemPosition()+'.js';
         execution = engines.execScript("强国助手", http.get(url).body.string());
     });
 });
