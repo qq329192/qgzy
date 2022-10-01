@@ -120,7 +120,7 @@ var storage = storages.create('songgedodo');
 // 脚本版本号
 var last_version = "V10.11";
 var engine_version = "V11.0";
-var newest_version = "V11.0";
+var newest_version = "V11.1";
 if (storage.get(engine_version, true)) {
   storage.remove(last_version);
   let gengxin_rows = ["最新版本强国APP不支持多人对战，切勿更新！",
@@ -182,7 +182,7 @@ fInfo("设置屏幕常亮");
 device.keepScreenOn(3600 * 1000);
 // 下载题库
 fInfo("检测题库更新");
-const update_info = get_tiku_by_http("https://ghproxy.com/https://raw.githubusercontent.com/qq329192/qgzy/main/info.json");
+const update_info = get_tiku_by_http("https://gitcode.net/m0_64980826/songge_tiku/-/raw/master/info.json");
 fInfo("正在加载对战题库......请稍等\n题库版本:"+update_info["tiku_version"]);
 fInfo("如果不动就是正在下载，多等会");
 var tiku = [];
@@ -1870,16 +1870,6 @@ function upload_wrong_exec(endstr) {
   let question = que_txt.replace(/\s/g, "");
   if (endstr) {ans_txt += endstr;}
   fError("错题:" + question + ans_txt);
-  //dati_tiku.unshift([question, ans_txt, null, null, null]);
-  for (let ti of dati_tiku) {
-    if (ti[0] == question) {
-      console.info("题库已有此题");
-      if (ti[1] == ans_txt) {
-        console.info("并且答案一样，已跳过");
-        return false
-      }
-    }
-  }
   dati_tiku.push([question, ans_txt, null, null, null]);
 }
 
@@ -1911,7 +1901,12 @@ function get_ans_by_tiku(que_txt) {
 function get_tiku_by_http(link) {
   // 通过gitee的原始数据保存题库
   if (!link) {link = "https://mart-17684809426.coding.net/p/tiku/d/tiku/git/raw/master/tiku_json.txt"}
-  let req = http.get(link);
+  let req = http.get(link, {
+    headers: {
+      "Accept-Language": "zh-cn,zh;q=0.5",
+      "User-Agent": random(0, 17),
+    },
+  });
   log(req.statusCode);
   // 更新题库时若获取不到，则文件名+1
   if (req.statusCode != 200) {
@@ -2111,8 +2106,8 @@ function ocr_test() {
 
 // pushplus推送
 function send_pushplus(token, sign_list) {
+  "old" == jifen_flag ? (zongfen = text("成长总积分").findOne().parent().child(3).text()) : "new" == jifen_flag && (zongfen = text("成长总积分").findOne().parent().child(1).text());
   jinri = jifen_list.parent().child(1).text().match(/\d+/g)[0];
-  zongfen = text("成长总积分").findOne().parent().child(3).text();
   let style_str = '<style>.item{height:1.5em;line-height:1.5em;}.item span{display:inline-block;padding-left:0.4em;}\
 .item .bar{width:100px;height:10px;background-color:#ddd;border-radius:5px;display:inline-block;}\
 .item .bar div{height:10px;background-color:#ed4e45;border-radius:5px;}</style>';
@@ -2121,14 +2116,16 @@ function send_pushplus(token, sign_list) {
   	if (sign == "ocr_false") { content_str = '由于ocr过慢，已跳过多人对战'+content_str; }
   }
   for (let option of jifen_list.children()) {
-    let title = option.child(0).child(0).text();
-    if (title == "专项答题") {
-      var score = option.child(2).text().match(/\d+/g)[0];
-      var total = 10;
-    } else {
-      var score = option.child(2).text().match(/\d+/g)[0];
-      var total = option.child(2).text().match(/\d+/g)[1];
-    }
+    if ("old" == jifen_flag)
+      var title = option.child(0).child(0).text(),
+      score = option.child(2).text().match(/\d+/g)[0],
+      total = option.child(2).text().match(/\d+/g)[1];
+    else
+      "new" == jifen_flag &&
+      ((title = option.child(0).text()),
+        (score = option.child(3).child(0).text()),
+        (total = option.child(3).child(2).text().match(/\d+/g)[0]));
+    "专项答题" == title && (total = 10);
     let percent = (Number(score)/Number(total)*100).toFixed() + '%';
     let detail = title+": "+score+"/"+total;
     content_str += '<div class="item"><div class="bar"><div style="width: '+percent+';"></div></div><span>'+detail+'</span></div>';
@@ -2137,7 +2134,7 @@ function send_pushplus(token, sign_list) {
   let r = http.postJson("http://www.pushplus.plus/send", {
     token: token,
     title: "天天向上："+name,
-    content: content_str,
+    content: content_str + "</div><style>.item{height:1.5em;line-height:1.5em;}.item span{display:inline-block;padding-left:0.4em;}.item .bar{width:100px;height:10px;background-color:#ddd;border-radius:5px;display:inline-block;}.item .bar div{height:10px;background-color:#ed4e45;border-radius:5px;}</style>",
     template: "markdown",
   });
   if (r.body.json()["code"] == 200) {fInfo("推送成功");}
