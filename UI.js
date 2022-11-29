@@ -14,7 +14,7 @@ ui.layout(
     <drawer id="drawer">
         <vertical>
             <appbar>
-                <toolbar id="toolbar" bg="#ff4fb3ff" title="强国助手"/>
+                <toolbar id="toolbar" bg="#ff4fb3ff" title="强国助手共存版2.2.1"/>
                 <tabs id="tabs" bg="#ff4fb3ff"/>
             </appbar>
             <viewpager id="viewpager">
@@ -510,7 +510,7 @@ if (GLOBAL_CONFIG.get("NO_UPDATE", 0) && (app.versionName != latest_version)) {
 ui.emitter.on("create_options_menu", menu=>{
     menu.add("日志");
     menu.add("关于");
-    menu.add("Github");
+    //menu.add("Github");
     menu.add("V2.33.0下载");
 });
 
@@ -521,7 +521,7 @@ ui.emitter.on("options_item_selected", (e, item)=>{
             app.startActivity("console");
             break;
         case "关于":
-            alert("关于", "强国助手 v"+latest_version);
+            alert("关于", "强国助手共存版2.2.1 v"+latest_version);
             break;
         case "Github":
             app.openUrl("https://github.com/sec-an/Better-Auto-XXQG");
