@@ -496,14 +496,14 @@ var thread = null;
 Initialize();
 
 // 版本更新检查
-var apkurl = "https://gh.fakev.cn/sec-an/Better-Auto-XXQG/releases/download/v2.2.0/v2.2.0.apk";
-var latest_version = "2.2.0";
-if (GLOBAL_CONFIG.get("NO_UPDATE", 0) && (app.versionName != latest_version)) {
-    ui.update.visibility = 0;
-    ui.update.setText("点击更新至最新版v" + latest_version);
-} else if (app.versionName != latest_version) {
-    checkversion();
-}
+//var apkurl = "https://gh.fakev.cn/sec-an/Better-Auto-XXQG/releases/download/v2.2.0/v2.2.0.apk";
+//var latest_version = "2.2.0";
+//if (GLOBAL_CONFIG.get("NO_UPDATE", 0) && (app.versionName != latest_version)) {
+   // ui.update.visibility = 0;
+   // ui.update.setText("点击更新至最新版v" + latest_version);
+//} else if (app.versionName != latest_version) {
+   // checkversion();
+//}
 
 
 // 创建选项菜单(右上角)
@@ -521,7 +521,7 @@ ui.emitter.on("options_item_selected", (e, item)=>{
             app.startActivity("console");
             break;
         case "关于":
-            alert("关于", "强国助手共存版2.2.1 v"+latest_version);
+            alert("关于", "强国助手共存版 v"+latest_version);
             break;
         case "Github":
             app.openUrl("https://github.com/sec-an/Better-Auto-XXQG");
