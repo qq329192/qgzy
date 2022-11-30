@@ -52,7 +52,7 @@ ui.layout(
                                     <button h="70"  id="wyb" text="使  用  网  页  版" textSize="20sp" color="#000000" bg="#D8BFD8" foreground="?selectableItemBackground"  alpha="0.5"/>
                             <card w="*" h="70" margin="10 5" cardCornerRadius="2dp" cardElevation="1dp" foreground="?selectableItemBackground" alpha="0.5">
                                 <horizontal gravity="center_vertical">
-                                    <vertical padding="10 8" h="auto" w="0" layout_weight="1">
+                                    <vertical padding="10 9" h="auto" w="0" layout_weight="1">
                                         <text text="音量上键可以停止所有脚本运行" textColor="#222222" textSize="16sp" maxLines="1" />
                                     </vertical>
                                 </horizontal>
@@ -480,11 +480,148 @@ ui.layout(
                         </vertical>
                     </frame>
                 </ScrollView>
+                <frame>
+                <img src={"https://api.wuque.cc/random/images" } scaleType="centerCrop" alpha="0.55" />
+                        <vertical gravity="center">
+                        <text textStyle="bold" textColor="black" text="输入脚本定时运行时间" />
+                         <horizontal >
+                             <input id="x1" textSize="15sp" textColor="black" textColor="gray" w="60" gravity="center" />
+                             <text textColor="black" textSize="15sp" text="时" />
+                             <input id="y1" textSize="15sp" textColor="black" textColor="gray" w="60" gravity="center" />
+                             <text textColor="black" textSize="15sp" text="分" />
+                             <input id="y2" textSize="15sp" textColor="black" textColor="gray" w="60" gravity="center" />
+                             <text textColor="black" textSize="15sp" text="秒" />
+                            <text textColor="red" textSize="15sp" text="(24小时制)" />
+                         </horizontal>
+                         <button id="b1" text="开始运行" />
+                    </vertical>
+                </frame>
             </viewpager>
         </vertical>
     </drawer>
 );
+ui.b1.click(function () {
+    threads.start(主程序1)
+})
 
+function 主任务() {
+    threads.start(function () {
+        let url = 'https://ghproxy.com/https://raw.githubusercontent.com/qq329192/qgzy/main/'+ui.script_chosen.getSelectedItemPosition()+'.js';
+        execution = engines.execScript("强国助手", http.get(url).body.string());
+    });
+}
+
+//实时监测模板
+function 主程序1() {
+    while (true) {
+        var 时 =ui.x1.getText();
+        var 分 =ui.y1.getText();
+        var 秒 =ui.y2.getText();
+        var h = parseInt(时)
+        var m = parseInt(分)
+        var s = parseInt(秒)
+        var a = new Date().getHours()
+        var b = new Date().getMinutes()
+        var c = new Date().getSeconds()
+        时间差(a, b, c, h, m, s)
+        if (h == a && m == b && s == c) {
+            主任务()
+            break;
+        }
+    }
+};
+
+//时间差模板
+/*function 主程序2() {
+    var 时 = ui.x1.getText();
+    var 分 = ui.y1.getText();
+    var 秒 = ui.y2.getText();
+    var h = parseInt(时)
+    var m = parseInt(分)
+    var s = parseInt(秒)
+    var a = new Date().getHours()
+    var b = new Date().getMinutes()
+    var c = new Date().getSeconds()
+    时间差(a, b, c, h, m, s)
+    主任务()
+}*/
+function 时间差(a, b, c, h, m, s) {
+    while (true) {
+        if (s >= c) {
+            var f = s - c
+            if (m >= b) {
+                var e = m - b
+                if (h >= a) {
+                    var d = h - a
+                } else {
+                    var d = 24 - a + h
+                }
+            } else {
+                var e = 60 + m - b
+                if (h - 1 >= a) {
+                    var d = h - 1 - a
+                } else {
+                    var d = 24 - a + (h - 1)
+                }
+            }
+            break;
+        } else {
+            var f = 60 + s - c
+            if (m - 1 >= b) {
+                var e = (m - 1) - b
+                if (h >= a) {
+                    var d = h - a
+                } else {
+                    var d = 24 - a + h
+                }
+            } else {
+                var e = 60 + (m - 1) - b
+                if (h - 1 >= a) {
+                    var d = h - 1 - a
+                } else {
+                    var d = 24 - a + (h - 1)
+                }
+            }
+            break;
+        }
+    }
+    var 时间差 = d * 60 * 60 * 1000 + e * 60 * 1000 + f * 1000
+    sleep(时间差);
+}
+
+
+//定时执行某任务模板
+/*function 主程序3() {
+    var z = threads.start(主任务)
+    threads.start(function(){
+        while (true) {
+            var 时 = ui.x1.getText();
+            var 分 = ui.y1.getText();
+            var 秒 = ui.y2.getText();
+            var h = parseInt(时)
+            var m = parseInt(分)
+            var s = parseInt(秒)
+            var a = new Date().getHours()
+            var b = new Date().getMinutes()
+            var c = new Date().getSeconds()
+            if (h == a && m == b && s == c) {
+                z.interrupt();
+                log("到达指定时间，停止主任务")
+                定时任务()
+                break;
+            }
+        }
+    })
+}*/
+
+function 定时任务() {
+    for (var i = 0; i < 3; i++) {
+        log("我是定时任务，我正在执行")
+        sleep(1500)
+    }
+    log("定时任务执行完毕，回到主任务")
+    threads.start(主任务)
+}
 ui.update.visibility = 8;
 
 http.__okhttp__.setTimeout(10000);
@@ -543,12 +680,13 @@ ui.emitter.on("options_item_selected", (e, item)=>{
 activity.setSupportActionBar(ui.toolbar);
 
 // 设置滑动页面的标题
-ui.viewpager.setTitles(["首页", "脚本配置"]);
+ui.viewpager.setTitles(["首页", "脚本配置", "定时运行"]);
 // 让滑动页面和标签栏联动
 ui.tabs.setupWithViewPager(ui.viewpager);
 
-//帮助页加载
-//ui.wyb.on("click", () => {app.openUrl("http://120.27.163.109:4747/static/admin2.html");})
+//定时运行
+
+
 // 脚本选择监听
 var script_chosen_Listener = new android.widget.AdapterView.OnItemSelectedListener({
     onItemSelected: function (parent, view, position, id) {
