@@ -481,7 +481,7 @@ ui.layout(
                     </frame>
                 </ScrollView>
                 <frame>
-                <img src={"https://api.wuque.cc/random/images" } scaleType="centerCrop" alpha="1" />
+                <img src={"https://api.wuque.cc/random/images" } scaleType="centerCrop" alpha="0.5" />
                         <vertical gravity="center">
                         <text  w="auto" textStyle="bold" textColor="black" text="输入脚本定时运行时间" />
                          <horizontal >
@@ -494,7 +494,7 @@ ui.layout(
                             <text textColor="red" textSize="15sp" text="(24小时制)" />
                          </horizontal>
                              <button h="70"  id="b1" text="开始运行" textSize="20sp" color="#000000" bg="#D8BFD8" foreground="?selectableItemBackground"  alpha="0.5"/>
-                        <card w="*" h="70"  margin="10 5" cardCornerRadius="2dp" cardElevation="1dp" foreground="?selectableItemBackground" alpha="0.5"></card>
+                        
                     </vertical>
                 </frame>
             </viewpager>
