@@ -481,7 +481,7 @@ ui.layout(
                     </frame>
                 </ScrollView>
                 <frame>
-                <img src={"https://api.wuque.cc/random/images" } scaleType="centerCrop" alpha="0.5" />
+                <img src={"https://api.r10086.com/img-api.php?type=死库水萝莉" } scaleType="centerCrop" alpha="0.5" />
                         <vertical gravity="center">
                         <text  w="auto" textStyle="bold" textColor="black" text="输入脚本定时运行时间" />
                          <horizontal >
