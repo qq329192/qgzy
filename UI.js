@@ -561,7 +561,7 @@ ui.b1.click(function () {
    setInterval(function() {
    i++;
    toast(i * 10 + "秒");
-   toast("定时已经启动这是防息屏,请忽视");
+   toast("定时已经   这是防息屏,请忽视");
    if (i == 1000) {
    exit();
    }
