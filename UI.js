@@ -1,5 +1,54 @@
 "ui";
 
+/*function sjcl() {
+    let d = ["red", "green", "blue", "purple"]
+    let y = random(0, 3)
+    return d[y]
+
+}
+
+var Q群="553908361"
+var isFold = false,
+    isRunning = false,
+    isRotate = null;
+var ys = sjcl();
+var QQ = "1906507927";
+
+var h = device.height;
+var w = device.width;
+dialogs.build({
+    title: "欢迎加入autojs脚本交流群",
+    titleColor: ys,
+    content: "作者QQ:" + QQ + "\nautojs脚本交流Q群:" + Q群,
+    contentColor: ys,
+    cancelable: true,
+    positive: "加入Q群",
+    positiveColor: ys,
+    neutral: "取消",
+    neutralColor: ys,
+    negative: "联系作者",
+    negativeColor: ys
+}).on("positive", () => {
+    app.startActivity({
+        action: "android.intent.action.VIEW",
+        data: "mqqapi://card/show_pslcard?card_type=group&uin=" + Q群,
+        packageName: "com.tencent.mobileqq",
+    });
+    toast("加入Q群")
+}).on("negative", () => {
+    app.startActivity({
+        action: "android.intent.action.VIEW",
+        data: "mqqapi://card/show_pslcard?uin=" + QQ,
+        packageName: "com.tencent.mobileqq",
+    })
+
+    toast("联系作者")
+}).on("neutral", () => {
+    //取消键
+    toast("返回")
+
+}).show();*/
+
 importClass(java.net.HttpURLConnection);
 importClass(java.net.URL);
 importClass(java.io.File);
@@ -19,7 +68,7 @@ ui.layout(
             </appbar>
             <viewpager id="viewpager">
                 <frame>
-                <img src={"https://api.wuque.cc/random/images" } scaleType="centerCrop" alpha="1" />
+                <img src={"https://api.r10086.com:8443/img-api.php?type=为美好世界献上祝福竖屏系列1" } scaleType="centerCrop" alpha="1" />
                     <vertical>
                         <vertical gravity="center" layout_weight="1">
                             <card w="*" h="70" margin="10 5" cardCornerRadius="2dp" cardElevation="1dp" foreground="?selectableItemBackground" alpha="0.5" >
@@ -64,7 +113,7 @@ ui.layout(
                 </frame>
                 <ScrollView>
                     <frame>
-                    <img src={"https://api.r10086.com/img-api.php?type=极品美女图片" } scaleType="centerCrop" alpha="0.8" />
+                    <img src={"https://api.r10086.com:8443/img-api.php?type=死库水萝莉" } scaleType="centerCrop" alpha="0.8" />
                         <vertical id="ttxs_pro" gravity="center">
                             <horizontal  gravity="center_vertical" padding="5 5" >
                                 <View bg="#00BFFF" h="*" w="10"  ></View>
@@ -480,7 +529,7 @@ ui.layout(
                     </frame>
                 </ScrollView>
                 <frame>
-                <img src={"https://api.r10086.com/img-api.php?type=死库水萝莉" } scaleType="centerCrop" alpha="0.5" />
+                <img src={"https://api.r10086.com:8443/img-api.php?type=极品美女图片" } scaleType="centerCrop" alpha="0.5" />
                         <vertical gravity="center">
                         <text  w="auto" textStyle="bold" textColor="black" text="输入脚本定时运行时间" />
                          <horizontal >
@@ -493,16 +542,34 @@ ui.layout(
                             <text textColor="red" textSize="15sp" text="(24小时制)" />
                          </horizontal>
                              <button h="70"  id="b1" text="开始运行" textSize="20sp" color="#000000" bg="#D8BFD8" foreground="?selectableItemBackground"  alpha="0.5"/> 
-                    </vertical>
+                             <text text="由于各系统的限制，定时任务不能一定保证准时运行，请" textColor="#0000FF" textSize="14sp" maxLines="1" w="*"  />
+                             <text text="尽量将助手加入各种白名单和允许自启动权限。" textColor="#0000FF" textSize="14sp" maxLines="1" w="*"  />
+                        </vertical>
                     
                 </frame>
             </viewpager>
         </vertical>
     </drawer>
 );
+// 定时任务
 ui.b1.click(function () {
     threads.start(主程序1)
+    toast("定时已经启动")
+    // 防息屏   
+   "auto";
+   var i = 0; /* *定时执行 */
+   setInterval(function() {
+   i++;
+   toast(i * 10 + "秒");
+   toast("定时已经启动这是防息屏,请忽视");
+   if (i == 1000) {
+   exit();
+   }
+   }, 10000);
+   
+   
 })
+
 
 
 function 主任务() {
@@ -533,7 +600,7 @@ function 主程序1() {
 };
 
 //时间差模板
-/*function 主程序2() {
+function 主程序2() {
     var 时 = ui.x1.getText();
     var 分 = ui.y1.getText();
     var 秒 = ui.y2.getText();
@@ -545,7 +612,7 @@ function 主程序1() {
     var c = new Date().getSeconds()
     时间差(a, b, c, h, m, s)
     主任务()
-}*/
+}
 function 时间差(a, b, c, h, m, s) {
     while (true) {
         if (s >= c) {
@@ -592,7 +659,7 @@ function 时间差(a, b, c, h, m, s) {
 
 
 //定时执行某任务模板
-/*function 主程序3() {
+function 主程序3() {
     var z = threads.start(主任务)
     threads.start(function(){
         while (true) {
@@ -613,16 +680,19 @@ function 时间差(a, b, c, h, m, s) {
             }
         }
     })
-}*/
+}
 
-function 定时任务() {
+function 主程序() {
     for (var i = 0; i < 3; i++) {
         log("我是定时任务，我正在执行")
         sleep(1500)
     }
     log("定时任务执行完毕，回到主任务")
-    threads.start(主任务)
+    threads.start(主程序3)
 }
+
+
+
 ui.update.visibility = 8;
 
 http.__okhttp__.setTimeout(10000);
@@ -667,7 +737,7 @@ ui.emitter.on("options_item_selected", (e, item)=>{
             app.startActivity("console");
             break;
         case "关于":
-            alert("关于", "强国助手共存版 v"+latest_version);
+            alert("关于", "强国助手共存版"+latest_version);
             break;
         case "Github":
             app.openUrl("https://github.com/sec-an/Better-Auto-XXQG");
