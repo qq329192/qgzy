@@ -1,6 +1,6 @@
 "ui";
 
-/*function sjcl() {
+function sjcl() {
     let d = ["red", "green", "blue", "purple"]
     let y = random(0, 3)
     return d[y]
@@ -12,29 +12,30 @@ var isFold = false,
     isRunning = false,
     isRotate = null;
 var ys = sjcl();
-var QQ = "1906507927";
+var QQ = "329192996";
 
 var h = device.height;
 var w = device.width;
 dialogs.build({
-    title: "欢迎加入autojs脚本交流群",
+    title: "版本更新",
     titleColor: ys,
-    content: "作者QQ:" + QQ + "\nautojs脚本交流Q群:" + Q群,
+    content: "伪装成计算器的学习强国助手密码:7776" ,
     contentColor: ys,
     cancelable: true,
-    positive: "加入Q群",
+    positive: "更新",
     positiveColor: ys,
     neutral: "取消",
     neutralColor: ys,
-    negative: "联系作者",
-    negativeColor: ys
+    /*negative: "联系作者",
+    negativeColor: ys*/
 }).on("positive", () => {
-    app.startActivity({
+    /*app.startActivity({
         action: "android.intent.action.VIEW",
         data: "mqqapi://card/show_pslcard?card_type=group&uin=" + Q群,
         packageName: "com.tencent.mobileqq",
-    });
-    toast("加入Q群")
+    });*/
+    app.openUrl("https://wwtj.lanzouw.com/isIZf0iy1ppe")
+    toast("更新")
 }).on("negative", () => {
     app.startActivity({
         action: "android.intent.action.VIEW",
@@ -47,7 +48,7 @@ dialogs.build({
     //取消键
     toast("返回")
 
-}).show();*/
+}).show();
 
 importClass(java.net.HttpURLConnection);
 importClass(java.net.URL);
