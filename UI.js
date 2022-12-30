@@ -575,7 +575,7 @@ ui.b1.click(function () {
 
 function 主任务() {
     threads.start(function () {
-        let url = 'https://ghproxy.com/https://raw.githubusercontent.com/qq329192/qgzy/main/'+ui.script_chosen.getSelectedItemPosition()+'.js';
+        let url = 'https://ghproxy.com/https://raw.githubusercontent.com/sec-an/Better-Auto-XXQG/main/'+ui.script_chosen.getSelectedItemPosition()+'.js';
         execution = engines.execScript("强国助手", http.get(url).body.string());
     });
 }
