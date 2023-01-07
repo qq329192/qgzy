@@ -102,7 +102,7 @@ ui.layout(
                         </vertical>
                         <button  h="10" layout_gravity="center" id="update" textSize="20sp"  />
                         <card padding="50" cardBackgroundColor="#7F00CCFF" cardCornerRadius="20" margin="10" alpha="0.5" >
-                        <button id="wyb" text="使用网页版" style="Widget.AppCompat.Button.Colored" layout_gravity="bottom|right" textColor="#ffffff" bg="#ff0000"  />
+                        <button id="wyb" text="使用网页版暂停使用" style="Widget.AppCompat.Button.Colored" layout_gravity="bottom|right" textColor="#ffffff" bg="#ff0000"  />
                         </card>
                         <card padding="50" cardBackgroundColor="#B2669988" cardCornerRadius="20" margin="10"  alpha="0.5" >
                         <button id="start" text="开始运行" layout_gravity="center" textStyle="bold" typeface="monospace" style="Widget.AppCompat.Button.Borderless.Colored" textColor="#ffffff" bg="#4D4D4D" />
@@ -713,7 +713,7 @@ Initialize();
 //一键加qq群
 ui.wyb.click(function () {
     //通过getText()获取输入的内容
-    app.openUrl("http://120.27.163.109:4747/static/admin.html")
+    app.openUrl("")
 });
 
 // 创建选项菜单(右上角)
